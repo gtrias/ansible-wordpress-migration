@@ -1,0 +1,48 @@
+<?php
+
+
+// ** MySQL settings ** //
+/** The name of the database for WordPress */
+define('DB_NAME', '{{ db_name }}');
+
+/** MySQL database username */
+define('DB_USER', '{{ db_user }}');
+
+/** MySQL database password */
+define('DB_PASSWORD', '{{ db_password }}');
+
+/** MySQL hostname */
+define('DB_HOST', '{{ db_host}}');
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+
+define('AUTH_KEY',         '@6+enMF&cq(>l]~|p7(Htu+|WY$|rV|%4j.ho@hlddk(a+N^}$]@;Y-0+Fa2p:K<');
+define('SECURE_AUTH_KEY',  '(ElWnX}V%nhIVb*b}i77M4ZTPb*!--G(jF0ihxta#a)b(ltd(sTEp)90- n)I2+r');
+define('LOGGED_IN_KEY',    'ARLDqLG5xe@Q58qE0&yR&$tXab.Fw~^0J]g|+m-eK;6` %-bZp?wzT#fgj8.~X@F');
+define('NONCE_KEY',        'bms4RvfZUFcUM:,{Rl-g|?,+go_!Ff[b|t]zmL+mgney=_sx6-DkoI&SPA:3/ITf');
+define('AUTH_SALT',        '@S`CQm/.&nUBol+cV!kVS%moKIA7ooD1!n |=I^a<RaV3A?eXSoP<h)iPQ|To</j');
+define('SECURE_AUTH_SALT', ';I&7D[[YaZw@9F@hGPrLdZC.{[3Hj.|SYs^WO-LP=}$F0tgL|6)x`;3C>cHn.:UD');
+define('LOGGED_IN_SALT',   'p9a5IGH-MP9`{Afue^xK#e;}z4a Cdr1JSjxXS@KSav&K@CAG=LSNCXN-_`KT4[>');
+define('NONCE_SALT',       'I6ckE|Jh`YR0N:,u-:OE^l[{ky*vz#X.YN6LW8J<zX1L#K1nIg1bjV+S|FG?s4gP');
+
+
+$table_prefix = 'wp_';
+
+define('WPLANG', 'es_ES');
+
+define('FS_METHOD','direct');
+
+define('WP_DEBUG', false);
+
+/* That's all, stop editing! Happy blogging. */
+
+/** Absolute path to the WordPress directory. */
+if ( !defined('ABSPATH') )
+        define('ABSPATH', dirname(__FILE__) . '/');
+
+/** Sets up WordPress vars and included files. */
+require_once(ABSPATH . 'wp-settings.php');
