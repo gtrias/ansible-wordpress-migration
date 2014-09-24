@@ -1,0 +1,16 @@
+wp_host_src:
+wp_host_target:
+wp_dir_src:
+wp_dir_target:
+wp_mysql_src:
+  host:
+  db:
+  user:
+  passwd:
+wp_mysql_target:
+  host:
+  db:
+  user:
+  passwd:
+wp_domain_src:
+wp_domain_target:
