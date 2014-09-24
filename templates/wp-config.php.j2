@@ -3,16 +3,16 @@
 
 // ** MySQL settings ** //
 /** The name of the database for WordPress */
-define('DB_NAME', '{{ db_name }}');
+define('DB_NAME', '{{ wp_mysql_target.db }}');
 
 /** MySQL database username */
-define('DB_USER', '{{ db_user }}');
+define('DB_USER', '{{ wp_mysql_target.user }}');
 
 /** MySQL database password */
-define('DB_PASSWORD', '{{ db_password }}');
+define('DB_PASSWORD', '{{ wp_mysql_target.passwd }}');
 
 /** MySQL hostname */
-define('DB_HOST', '{{ db_host}}');
+define('DB_HOST', '{{ wp_mysql_target.host }}');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
