@@ -14,3 +14,4 @@ wp_mysql_target:
   passwd:
 wp_domain_src:
 wp_domain_target:
+wp_temp_dump:
