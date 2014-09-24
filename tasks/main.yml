@@ -1,0 +1,6 @@
+- name: Copy files from source to target
+  synchronize: src={{ wp_dir_src }} dest={{ wp_dir_target }}
+  delegate_to: {{ wp_host_src }}
+
+- name: Backup DB
+  
