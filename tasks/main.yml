@@ -12,6 +12,9 @@
   delegate_to: "{{ wp_host_src }}"
   when: wp_mysql_src.without_python == true
 
+- name: Unscape dump file
+  replace: dest={{ wp_temp_dump }} regexp='\\"' replace='"'
+
 - name: Replace DB data
   wpreplace: dest={{ wp_temp_dump }} regexp='{{ wp_domain_src }}' replace='{{ wp_domain_target }}'
   delegate_to: "{{ wp_host_src }}"

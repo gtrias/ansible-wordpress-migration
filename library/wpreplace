@@ -154,19 +154,15 @@ def main():
 	else:
             diff_value = int(m.group(1)) - new_length
 	if re.search(mre, m.group(2)) is not None:
-	    #print 's:'+str(diff_value)+':"' +  m.group(2) +'";'
 	    return 's:'+str(diff_value)+':"' +  m.group(2) +'";'
         else:
 	    return 's:'+m.group(1)+':"' +  m.group(2) +'";'
 
 
     result = re.subn(mrec, repl_calc, contents)
-
-    #print result[0]
-
     result2 = re.subn(mre, params['replace'], result[0], 0)
 
-    if result2[1] > 0 and contents != result2[0]:
+    if result[1] > 0 and contents != result[0] or result2[1] > 0 and contents != result2[0]:
         msg = '%s replacements made' % result[1]
         changed = True
     else:
