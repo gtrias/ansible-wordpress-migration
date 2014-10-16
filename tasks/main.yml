@@ -1,15 +1,28 @@
 - name: Copy files from source:{{ wp_dir_src }} to target:{{ wp_dir_target }}
-  synchronize: src={{ wp_dir_src }} dest={{ wp_dir_target }}
+  synchronize: src={{ wp_dir_src }} dest={{ wp_dir_target }} set_remote_user=no
   delegate_to: "{{ wp_host_src }}"
 
 - name: Backup DB
-  action: mysql_db login_host={{ wp_mysql_src.host }} login_password={{ wp_mysql_src.passwd }} login_user={{ wp_mysql_src.user }} state=dump name={{ wp_mysql_src.db }} target={{ wp_temp_dump }}
+  action: mysql_db login_host={{ wp_mysql_src.host }} login_password={{ wp_mysql_src.passwd }} login_user={{ wp_mysql_src.user }} state=dump name={{ wp_mysql_src.db }} target={{ wp_temp_dump }} login_port={{ wp_mysql_src.port }}
+  delegate_to: "{{ wp_host_src }}"
+  when: wp_mysql_src.without_python == false
+
+- name: Backup DB
+  shell: mysqldump -h {{ wp_mysql_src.host }} -P {{ wp_mysql_src.port }} -p{{ wp_mysql_src.passwd }} -u {{ wp_mysql_src.user }} {{ wp_mysql_src.db }} > {{ wp_temp_dump }} 
+  delegate_to: "{{ wp_host_src }}"
+  when: wp_mysql_src.without_python == true
 
 - name: Replace DB data
   wpreplace: dest={{ wp_temp_dump }} regexp='{{ wp_domain_src }}' replace='{{ wp_domain_target }}'
+  delegate_to: "{{ wp_host_src }}"
+
+- name: Modified database:{{ wp_temp_dump }} to target host
+  synchronize: src={{ wp_temp_dump }} dest={{ wp_temp_dump }} set_remote_user=no
+  delegate_to: "{{ wp_host_src }}"
+  when: wp_mysql_src.without_python == true
 
 - name: Import DB
-  action: mysql_db login_host={{ wp_mysql_target.host }} login_password={{ wp_mysql_target.passwd }} login_user={{ wp_mysql_target.user }} state=import name={{ wp_mysql_target.db }} target={{ wp_temp_dump }}
+  action: mysql_db login_host={{ wp_mysql_target.host }} login_password={{ wp_mysql_target.passwd }} login_user={{ wp_mysql_target.user }} state=import name={{ wp_mysql_target.db }} target={{ wp_temp_dump }} login_port={{ wp_mysql_target.port }}
 
 - name: Upload wp-config
   template: src=wp-config.php.j2 dest={{ wp_dir_target }}/wp-config.php
